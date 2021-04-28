@@ -1,16 +1,20 @@
 import axios from "axios";
 
-import { popularGamesURL } from "../api";
+import { popularGamesURL, upcomingGamesURL, newGamesURL } from "../api";
 
 /* async(dispatch)=> add this after arrow function as we are using thunk
 for async call or use axios(with then and catch) instead of async await. */
 export const loadGames = () => async (dispatch) => {
-  const popularData = await axios.get(popularGamesURL());
-  console.log(popularData);
+  const popularGamesData = await axios.get(popularGamesURL());
+  const newGamesData = await axios.get(newGamesURL());
+  const upcomingGamesData = await axios.get(upcomingGamesURL());
+
   dispatch({
     type: "FETCH_GAMES",
     payload: {
-      popular: popularData.data.results,
+      popular: popularGamesData.data.results,
+      newGames: newGamesData.data.results,
+      upcoming: upcomingGamesData.data.results,
     },
   });
 };
