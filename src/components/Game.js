@@ -3,23 +3,33 @@ import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { loadDetail } from "../actions/detailsAction";
+
 const Game = ({ name, released, id, image }) => {
+  const dispatch = useDispatch();
+
+  const loadDetailHandler = () => {
+    dispatch(loadDetail(id));
+  };
   return (
-    <StyledGame>
-      <h3>{name}</h3>
-      <p>{released}</p>
+    <StyledGame onClick={loadDetailHandler}>
       <img src={image} alt="" />
+      <StyledDesc>
+        <h3>{name}</h3>
+        <p>{released}</p>
+      </StyledDesc>
     </StyledGame>
   );
 };
 
 const StyledGame = styled(motion.div)`
   min-height: 22vh;
-  padding-top: 1rem;
-  box-shadow: 0px 3px 20px rgba(120, 120, 120, 0.4);
   text-align: center;
   border-radius: 10px;
   overflow: hidden;
+  background-color: #202020;
 
   img {
     width: 100%;
@@ -27,6 +37,10 @@ const StyledGame = styled(motion.div)`
     object-fit: cover;
     margin-bottom: -10px;
   }
+`;
+
+const StyledDesc = styled.div`
+  margin: 1rem 0;
 `;
 
 export default Game;
