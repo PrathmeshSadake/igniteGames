@@ -30,7 +30,7 @@ html{
 body{
     font-family: 'Nunito', sans-serif;
     width:100%;
-    background-color: #1a1a1a;
+    background-color: #151515;
 }
 h2{
     font-size: 2.5rem;
@@ -39,6 +39,7 @@ h2{
 }
 h3{
     font-size: 1.25rem;
+    font-weight: 600;
     color: #eee;
 
 }
