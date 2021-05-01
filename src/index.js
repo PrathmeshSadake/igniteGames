@@ -18,6 +18,7 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 // ROOT REDUCER
 import rootReducer from "./reducers";
+import { BrowserRouter } from "react-router-dom";
 
 // Combines redux dev tools and thunk in one line for us.
 //Check Redux dev tools docs for more info.
@@ -27,7 +28,10 @@ const store = createStore(rootReducer, composeEnhancer(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
+
   document.getElementById("root")
 );
