@@ -22,7 +22,9 @@ const Home = () => {
   }, [dispatch]);
 
   //Get data from the store.
-  const { popular, newGames, upcoming } = useSelector((state) => state.games);
+  const { popular, newGames, upcoming, searched } = useSelector(
+    (state) => state.games
+  );
 
   return (
     <GameList>
@@ -31,6 +33,22 @@ const Home = () => {
           {/* Should have toggle in this case we have pathID */}
           {pathId && <GameDetail pathId={pathId} />}
         </AnimatePresence>
+        {searched.length ? (
+          <div className="searched">
+            <h2>Searched Games</h2>
+            <Games>
+              {searched.map((game) => (
+                <Game
+                  key={game.id}
+                  name={game.name}
+                  released={game.released}
+                  id={game.id}
+                  image={game.background_image}
+                />
+              ))}
+            </Games>
+          </div>
+        ) : null}
         <h2>Upcoming Games</h2>
         <Games>
           {upcoming.map((game) => (
@@ -55,17 +73,21 @@ const Home = () => {
             />
           ))}
         </Games>
+
         <h2>New Games</h2>
         <Games>
-          {newGames.map((game) => (
-            <Game
-              key={game.id}
-              name={game.name}
-              released={game.released}
-              id={game.id}
-              image={game.background_image}
-            />
-          ))}
+          {newGames.map((game) => {
+            console.log(game.background_image);
+            return (
+              <Game
+                key={game.id}
+                name={game.name}
+                released={game.released}
+                id={game.id}
+                image={game.background_image}
+              />
+            );
+          })}
         </Games>
       </AnimateSharedLayout>
     </GameList>
